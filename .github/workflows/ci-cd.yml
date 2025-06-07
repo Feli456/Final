@@ -19,15 +19,20 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build Docker image
-      run: docker build -t felicia009/dockerhub_felicia:latest .
+      run: |
+        docker build -t felicia009/dockerhub_felicia:latest .
 
     - name: Push Docker image to Docker Hub
-      run: docker push felicia009/dockerhub_felicia:latest
+      run: |
+        docker push felicia009/dockerhub_felicia:latest
 
     - name: Set up kubectl
       uses: azure/setup-kubectl@v3
       with:
         version: 'latest'
+
+    - name: Create kube config directory
+      run: mkdir -p $HOME/.kube
 
     - name: Setup kubeconfig file
       run: echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
