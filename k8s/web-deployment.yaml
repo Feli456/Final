@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,9 +14,8 @@ spec:
         app: web
     spec:
       containers:
-  - name: web
-    image: felicia009/dockerhub_felicia:latest
-    imagePullPolicy: Always
-    ports:
-      - containerPort: 80
-
+        - name: web
+          image: felicia009/dockerhub_felicia:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
